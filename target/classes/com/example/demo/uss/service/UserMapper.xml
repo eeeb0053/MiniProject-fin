@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.uss.service.UserMapper">
+    <insert id="insert" parameterType="com.example.demo.uss.service.User">
+        insert into users (userid, password, name, email, gender, birthday, phone_number) 
+        values (#{userid}, #{password}, #{name}, #{email}, #{gender}, #{birthday}, #{phoneNumber})
+    </insert>
+    <select id="login" resultType="com.example.demo.uss.service.User"
+    				   parameterType="com.example.demo.uss.service.User">
+        select user_num userNum, userid, password, name, email, gender, birthday, phone_number phoneNumber
+        from users
+        where userid like #{userid} and password like #{password}
+    </select>
+    <select id="selectById" resultType="com.example.demo.uss.service.User" 
+                            parameterType="int">
+        select user_num userNum, userid, password, name, email, gender, birthday, phone_number phoneNumber
+        from users
+        where user_num like #{userNum}
+    </select>
+    <update id="update" parameterType="com.example.demo.uss.service.User">
+        update users set password = #{password}, name = #{name}, email = #{email},
+        				 gender= #{gender}, birthday = #{birthday}, phone_number = #{phoneNumber}
+        where user_num like #{userNum}
+    </update>
+    <delete id="delete" parameterType="com.example.demo.uss.service.User">
+        delete from users where user_num like #{userNum}
+    </delete>
+</mapper>
